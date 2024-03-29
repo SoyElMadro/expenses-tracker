@@ -10,7 +10,7 @@ export default function DashboardPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [logs, setLogs] = useState([]);
   const isDarkModeLS =
-    localStorage.getItem("darkMode") === "true" ? true : false;
+    window.localStorage.getItem("darkMode") === "true" ? true : false;
 
   useEffect(() => {
     setIsDarkMode(isDarkModeLS);
@@ -19,7 +19,7 @@ export default function DashboardPage() {
   const handleDarkMode = () => {
     const newDarkMode = !isDarkMode;
     setIsDarkMode(newDarkMode);
-    localStorage.setItem("darkMode", newDarkMode.toString());
+    window.localStorage.setItem("darkMode", newDarkMode.toString());
   };
 
   return (

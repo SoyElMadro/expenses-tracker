@@ -11,10 +11,10 @@ export default function AnalyticsPage() {
   const [categoryTotals, setCategoryTotals] = useState([]);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(localStorage.getItem("logs")) || [];
+    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
     setLogs(storedLogs);
 
-    const darkMode = localStorage.getItem("darkMode");
+    const darkMode = window.localStorage.getItem("darkMode");
     setIsDarkMode(darkMode === "true");
   }, []);
 

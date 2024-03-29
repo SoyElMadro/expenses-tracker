@@ -1,1 +1,0 @@
-revisar footer.js, newexpense/page.js y dashboard/page.js

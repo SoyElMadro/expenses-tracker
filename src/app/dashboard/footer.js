@@ -9,14 +9,14 @@ export default function Footer({
   logs,
 }) {
   useEffect(() => {
-    const selectedCategory = localStorage.getItem("selectedCategory");
-    const selectedLogo = localStorage.getItem("selectedLogo");
-    const amountSpent = localStorage.getItem("amountSpent");
-    const timeAdded = localStorage.getItem("timeAdded");
-    const exactlySec = localStorage.getItem("exactlySec");
+    const selectedCategory = window.localStorage.getItem("selectedCategory");
+    const selectedLogo = window.localStorage.getItem("selectedLogo");
+    const amountSpent = window.localStorage.getItem("amountSpent");
+    const timeAdded = window.localStorage.getItem("timeAdded");
+    const exactlySec = window.localStorage.getItem("exactlySec");
 
     if (selectedCategory && amountSpent) {
-      const existingLogs = JSON.parse(localStorage.getItem("logs")) || [];
+      const existingLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
       const isNewLogDuplicate = existingLogs.some(
         (log) =>
           log.category === selectedCategory &&
@@ -37,7 +37,7 @@ export default function Footer({
 
         const newLogs = [...existingLogs, newLog];
 
-        localStorage.setItem("logs", JSON.stringify(newLogs));
+        window.localStorage.setItem("logs", JSON.stringify(newLogs));
         setLogs(newLogs);
       }
     }
@@ -49,7 +49,7 @@ export default function Footer({
   }, [logs, setTotalSpent]);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(localStorage.getItem("logs")) || [];
+    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
     setLogs(storedLogs);
   }, []);
 

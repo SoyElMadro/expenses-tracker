@@ -64,7 +64,7 @@ export default function NewExpensePage() {
   const [showNewCategoryInputs, setShowNewCategoryInputs] = useState(false);
 
   useEffect(() => {
-    const darkMode = localStorage.getItem("darkMode");
+    const darkMode = window.localStorage.getItem("darkMode");
     setIsDarkMode(darkMode === "true");
   }, []);
 
@@ -79,17 +79,17 @@ export default function NewExpensePage() {
     if (selectedCategory) {
       const selectedLogo = selectedCategory.emoji;
 
-      localStorage.setItem("selectedLogo", selectedLogo);
+      window.localStorage.setItem("selectedLogo", selectedLogo);
     } else {
       console.error(
         "La opción seleccionada no se encontró en el array de opciones."
       );
     }
 
-    localStorage.setItem("selectedCategory", selectedOption);
-    localStorage.setItem("amountSpent", amount);
-    localStorage.setItem("timeAdded", Date());
-    localStorage.setItem("exactlySec", date.getTime());
+    window.localStorage.setItem("selectedCategory", selectedOption);
+    window.localStorage.setItem("amountSpent", amount);
+    window.localStorage.setItem("timeAdded", Date());
+    window.localStorage.setItem("exactlySec", date.getTime());
 
     router.push("/dashboard");
   };

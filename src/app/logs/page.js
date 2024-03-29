@@ -8,21 +8,21 @@ export default function LogsPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(localStorage.getItem("logs")) || [];
+    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
     setLogs(storedLogs);
 
-    const darkMode = localStorage.getItem("darkMode");
+    const darkMode = window.localStorage.getItem("darkMode");
     setIsDarkMode(darkMode === "true");
   }, []);
 
   useEffect(() => {
-    const selectedCategory = localStorage.getItem("selectedCategory");
-    const selectedLogo = localStorage.getItem("selectedLogo");
-    const amountSpent = localStorage.getItem("amountSpent");
-    const timeAdded = localStorage.getItem("timeAdded");
+    const selectedCategory = window.localStorage.getItem("selectedCategory");
+    const selectedLogo = window.localStorage.getItem("selectedLogo");
+    const amountSpent = window.localStorage.getItem("amountSpent");
+    const timeAdded = window.localStorage.getItem("timeAdded");
 
     if (selectedCategory && amountSpent) {
-      const existingLogs = JSON.parse(localStorage.getItem("logs")) || [];
+      const existingLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
       const isNewLogDuplicate = existingLogs.some(
         (log) =>
           log.category === selectedCategory &&
@@ -41,7 +41,7 @@ export default function LogsPage() {
 
         const newLogs = [...existingLogs, newLog];
 
-        localStorage.setItem("logs", JSON.stringify(newLogs));
+        window.localStorage.setItem("logs", JSON.stringify(newLogs));
         setLogs(newLogs);
         console.log("todo añadido");
       }
@@ -49,7 +49,7 @@ export default function LogsPage() {
   }, []);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(localStorage.getItem("logs")) || [];
+    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
     setLogs(storedLogs);
   }, []);
 
