@@ -138,7 +138,7 @@ export default function AnalyticsPage() {
         <div className="sm:w-1/4 xl:w-1/3">
           <canvas id="donutChart"></canvas>
         </div>
-        <div className="sm:w-1/2 xl:w-1/2 mt-28 mx-4">
+        <div className="sm:w-1/2 xl:w-1/2 pt-28 px-4">
           <div className="mb-4">
             <ul className="border rounded-lg overflow-hidden">
               {categoryTotals.map((categoryItem, index) => (
