@@ -79,17 +79,21 @@ export default function NewExpensePage() {
     if (selectedCategory) {
       const selectedLogo = selectedCategory.emoji;
 
-      window.localStorage.setItem("selectedLogo", selectedLogo);
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem("selectedLogo", selectedLogo);
+      }
     } else {
       console.error(
         "La opción seleccionada no se encontró en el array de opciones."
       );
     }
 
-    window.localStorage.setItem("selectedCategory", selectedOption);
-    window.localStorage.setItem("amountSpent", amount);
-    window.localStorage.setItem("timeAdded", Date());
-    window.localStorage.setItem("exactlySec", date.getTime());
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("selectedCategory", selectedOption);
+      window.localStorage.setItem("amountSpent", amount);
+      window.localStorage.setItem("timeAdded", Date());
+      window.localStorage.setItem("exactlySec", date.getTime());
+    }
 
     router.push("/dashboard");
   };

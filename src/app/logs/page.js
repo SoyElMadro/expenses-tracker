@@ -8,21 +8,46 @@ export default function LogsPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
+    const storedLogs =
+      JSON.parse(
+        typeof window !== undefined
+          ? window.localStorage.getItem("logs")
+          : undefined
+      ) || [];
     setLogs(storedLogs);
 
-    const darkMode = window.localStorage.getItem("darkMode");
+    const darkMode =
+      typeof window !== undefined
+        ? window.localStorage.getItem("darkMode")
+        : undefined;
     setIsDarkMode(darkMode === "true");
   }, []);
 
   useEffect(() => {
-    const selectedCategory = window.localStorage.getItem("selectedCategory");
-    const selectedLogo = window.localStorage.getItem("selectedLogo");
-    const amountSpent = window.localStorage.getItem("amountSpent");
-    const timeAdded = window.localStorage.getItem("timeAdded");
+    const selectedCategory =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("selectedCategory")
+        : undefined;
+    const selectedLogo =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("selectedLogo")
+        : undefined;
+    const amountSpent =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("amountSpent")
+        : undefined;
+    const timeAdded =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("timeAdded")
+        : undefined;
 
     if (selectedCategory && amountSpent) {
-      const existingLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
+      const existingLogs =
+        JSON.parse(
+          typeof window !== "undefined"
+            ? window.localStorage.getItem("logs")
+            : undefined
+        ) || [];
       const isNewLogDuplicate = existingLogs.some(
         (log) =>
           log.category === selectedCategory &&
@@ -41,7 +66,9 @@ export default function LogsPage() {
 
         const newLogs = [...existingLogs, newLog];
 
-        window.localStorage.setItem("logs", JSON.stringify(newLogs));
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem("logs", JSON.stringify(newLogs));
+        }
         setLogs(newLogs);
         console.log("todo añadido");
       }
@@ -49,7 +76,12 @@ export default function LogsPage() {
   }, []);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
+    const storedLogs =
+      JSON.parse(
+        typeof window !== "undefined"
+          ? window.localStorage.getItem("logs")
+          : undefined
+      ) || [];
     setLogs(storedLogs);
   }, []);
 
@@ -65,7 +97,7 @@ export default function LogsPage() {
 
   return (
     <section
-      className={`flex flex-col h-max ${
+      className={`flex flex-col sm:h-full max-xl:h-max ${
         isDarkMode ? "bg-white/10 text-white" : "bg-white text-black"
       }`}
     >

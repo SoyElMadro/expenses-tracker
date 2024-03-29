@@ -9,14 +9,34 @@ export default function Footer({
   logs,
 }) {
   useEffect(() => {
-    const selectedCategory = window.localStorage.getItem("selectedCategory");
-    const selectedLogo = window.localStorage.getItem("selectedLogo");
-    const amountSpent = window.localStorage.getItem("amountSpent");
-    const timeAdded = window.localStorage.getItem("timeAdded");
-    const exactlySec = window.localStorage.getItem("exactlySec");
+    const selectedCategory =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("selectedCategory")
+        : undefined;
+    const selectedLogo =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("selectedLogo")
+        : undefined;
+    const amountSpent =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("amountSpent")
+        : undefined;
+    const timeAdded =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("timeAdded")
+        : undefined;
+    const exactlySec =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("exactlySec")
+        : undefined;
 
     if (selectedCategory && amountSpent) {
-      const existingLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
+      const existingLogs =
+        JSON.parse(
+          typeof window !== "undefined"
+            ? window.localStorage.getItem("logs")
+            : undefined
+        ) || [];
       const isNewLogDuplicate = existingLogs.some(
         (log) =>
           log.category === selectedCategory &&
@@ -37,7 +57,9 @@ export default function Footer({
 
         const newLogs = [...existingLogs, newLog];
 
-        window.localStorage.setItem("logs", JSON.stringify(newLogs));
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem("logs", JSON.stringify(newLogs));
+        }
         setLogs(newLogs);
       }
     }
@@ -49,7 +71,12 @@ export default function Footer({
   }, [logs, setTotalSpent]);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
+    const storedLogs =
+      JSON.parse(
+        typeof window !== "undefined"
+          ? window.localStorage.getItem("logs")
+          : undefined
+      ) || [];
     setLogs(storedLogs);
   }, []);
 
@@ -90,7 +117,13 @@ export default function Footer({
                     {item.time}
                   </div>
                 </div>
-                <div className={`ml-auto ${isDarkMode ? "text-red-400" : "text-red-600"}`}>-{item.price}$</div>
+                <div
+                  className={`ml-auto ${
+                    isDarkMode ? "text-red-400" : "text-red-600"
+                  }`}
+                >
+                  -{item.price}$
+                </div>
               </li>
             );
           })}

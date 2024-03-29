@@ -11,10 +11,18 @@ export default function AnalyticsPage() {
   const [categoryTotals, setCategoryTotals] = useState([]);
 
   useEffect(() => {
-    const storedLogs = JSON.parse(window.localStorage.getItem("logs")) || [];
+    const storedLogs =
+      JSON.parse(
+        typeof window !== "undefined"
+          ? window.localStorage.getItem("logs")
+          : undefined
+      ) || [];
     setLogs(storedLogs);
 
-    const darkMode = window.localStorage.getItem("darkMode");
+    const darkMode =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("darkMode")
+        : undefined;
     setIsDarkMode(darkMode === "true");
   }, []);
 
@@ -107,7 +115,7 @@ export default function AnalyticsPage() {
 
   return (
     <section
-      className={`h-max ${
+      className={`sm:h-full max-xl:h-max ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
